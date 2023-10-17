@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, CardMedia, Menu, MenuItem } from '@mui/material';
 import { User } from '../../../../type';
-import { Link as NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { logout } from '../../../features/users/usersThunk';
 
@@ -29,19 +29,6 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 
   return (
     <>
-      <Button component={NavLink} to="/artists/new" color="inherit">
-        Add Artist
-      </Button>
-      <Button component={NavLink} to="/albums/new" color="inherit">
-        Add Album
-      </Button>
-      <Button component={NavLink} to="/tracks/new" color="inherit">
-        Add Track
-      </Button>
-      <Button component={NavLink} to="/trackHistories" color="warning">
-        Track History
-      </Button>
-
       <CardMedia>
         <img
           style={{ height: '50px', borderRadius: '50px', width: '50px' }}
