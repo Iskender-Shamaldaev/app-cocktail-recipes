@@ -16,6 +16,7 @@ userRouter.post('/', imagesUpload.single('avatar'), async (req, res, next) => {
       username: req.body.username,
       password: req.body.password,
       displayName: req.body.displayName,
+      email: req.body.email,
       avatar: req.file ? req.file.filename : null,
     });
 
@@ -41,13 +42,13 @@ userRouter.post('/sessions', async (req, res, next) => {
     const user = await User.findOne({ username: req.body.username });
 
     if (!user) {
-      return res.status(400).send({ error: 'Wrong password or username! [Username]' });
+      return res.status(400).send({ error: 'Wrong password or username!' });
     }
 
     const isMatch = await user.checkPassword(req.body.password);
 
     if (!isMatch) {
-      return res.status(400).send({ error: 'Wrong password or username! [Password]' });
+      return res.status(400).send({ error: 'Wrong password or username!' });
     }
 
     user.generateToken();
