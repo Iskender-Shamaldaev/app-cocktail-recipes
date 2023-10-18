@@ -29,28 +29,10 @@ interface Props {
   id: string;
   name: string;
   image: string | null;
-  recipe: string;
   isPublished: boolean;
-  user: {
-    name: string;
-  };
-  ingredients: [
-    {
-      name: string;
-      quantity: string;
-    },
-  ];
 }
 
-const ArtistItem: React.FC<Props> = ({
-  id,
-  name,
-  image,
-  isPublished,
-  recipe,
-  user,
-  ingredients,
-}) => {
+const ArtistItem: React.FC<Props> = ({ id, name, image, isPublished }) => {
   let cocktailImage = imageNotAvailable;
   const users = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
@@ -75,7 +57,7 @@ const ArtistItem: React.FC<Props> = ({
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Grid item xs={12} sm={6} md={4} lg={3} component={Link} to={'/ingredients/' + id}>
+      <Grid item xs={12} sm={6} md={4} lg={3} component={Link} to={'/cocktails/' + id}>
         <Card>
           <CardActionArea>
             <CardMedia sx={{ height: '400px' }} image={cocktailImage} />

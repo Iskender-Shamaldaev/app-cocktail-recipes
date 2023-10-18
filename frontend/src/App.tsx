@@ -21,7 +21,7 @@ function App() {
         <Container maxWidth="xl">
           <Routes>
             <Route path="/" element={<Cocktails />} />
-            <Route path="/ingredients/:id" element={<Ingredients />} />
+            <Route path="/cocktails/:id" element={<Ingredients />} />
             <Route path="/cocktails/new" element={<CocktailsForm />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />

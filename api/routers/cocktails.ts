@@ -29,6 +29,21 @@ cocktailRouter.get('/', async (req, res) => {
   }
 });
 
+cocktailRouter.get('/:id', async (req, res) => {
+  try {
+    const result = await Cocktail.findById(req.params.id).populate({
+      path: 'user',
+      select: '-_id name',
+    });
+    if (!result) {
+      return res.sendStatus(404);
+    }
+    return res.send(result);
+  } catch {
+    return res.sendStatus(500);
+  }
+});
+
 cocktailRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next) => {
   try {
     const productData: ICocktail = {

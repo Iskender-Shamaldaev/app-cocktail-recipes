@@ -46,9 +46,6 @@ const Cocktails = () => {
               name={cocktail.name}
               image={cocktail.image}
               isPublished={cocktail.isPublished}
-              user={cocktail.user}
-              recipe={cocktail.recipe}
-              ingredients={cocktail.ingredients}
             />
           ))}
         </Grid>
