@@ -10,10 +10,22 @@ const cocktailRouter = express.Router();
 
 cocktailRouter.get('/', async (req, res) => {
   try {
-    const cocktails = await Cocktail.find();
-    res.send(cocktails);
-  } catch (e) {
-    return res.send(500);
+    const userQuery = req.query.user;
+
+    let query = Cocktail.find();
+
+    if (userQuery) {
+      query = query.where('artist', userQuery);
+    }
+
+    query = query.populate('user', 'name');
+
+    const results = await query;
+
+    res.send(results);
+  } catch (error) {
+    console.error(error);
+    return res.sendStatus(500);
   }
 });
 

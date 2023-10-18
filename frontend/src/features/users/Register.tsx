@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { Avatar, Box, Button, Container, Grid, Typography, Link, TextField } from '@mui/material';
+import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectRegisterError } from './usersSlice';
@@ -17,6 +17,7 @@ const Register = () => {
     username: '',
     password: '',
     displayName: '',
+    email: '',
     avatar: null,
   });
 
@@ -110,6 +111,18 @@ const Register = () => {
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError('displayName'))}
                 helperText={getFieldError('displayName')}
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Email"
+                name="email"
+                autoComplete="email"
+                value={state.email}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError('email'))}
+                helperText={getFieldError('email')}
                 fullWidth
               />
             </Grid>

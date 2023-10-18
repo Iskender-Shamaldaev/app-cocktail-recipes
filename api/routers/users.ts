@@ -94,6 +94,7 @@ userRouter.post('/google', async (req, res, next) => {
         googleId: id,
         displayName,
         avatar,
+        email: email,
       });
     }
 

@@ -3,6 +3,7 @@ export interface RegisterMutation {
   password: string;
   displayName: string;
   avatar: File | null;
+  email: string;
 }
 
 export interface LoginMutation {
@@ -22,6 +23,24 @@ export interface User {
   role: string;
   displayName: string;
   avatar: string;
+  email: string;
+}
+
+export interface Cocktail {
+  _id: string;
+  user: {
+    name: string;
+  };
+  name: string;
+  image: string | null;
+  isPublished: boolean;
+  recipe: string;
+  ingredients: [
+    {
+      name: string;
+      quantity: string;
+    },
+  ];
 }
 
 export interface ValidationError {

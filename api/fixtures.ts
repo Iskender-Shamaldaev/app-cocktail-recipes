@@ -10,6 +10,7 @@ const run = async () => {
 
   try {
     await db.dropCollection('users');
+    await db.dropCollection('cocktails');
   } catch (e) {
     console.log('Collections were not present, skipping drop...');
   }
@@ -26,7 +27,7 @@ const run = async () => {
     },
     {
       username: 'admin',
-      password: '1qaz@WSX29',
+      password: '123',
       token: crypto.randomUUID(),
       role: 'admin',
       displayName: 'SuperAdmin',
