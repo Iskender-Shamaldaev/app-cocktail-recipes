@@ -16,6 +16,7 @@ import { apiUrl, userRoles } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
 import { deleteCocktail, fetchCocktails, toggleCocktailPublished } from '../cocktailsThunk';
+import { motion } from 'framer-motion';
 
 const Link = styled(Navlink)({
   color: 'inherit',
@@ -25,6 +26,11 @@ const Link = styled(Navlink)({
   },
 });
 
+const fadeInVariants = {
+  hidden: { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+};
+
 interface Props {
   id: string;
   name: string;
@@ -32,7 +38,7 @@ interface Props {
   isPublished: boolean;
 }
 
-const ArtistItem: React.FC<Props> = ({ id, name, image, isPublished }) => {
+const CocktailItem: React.FC<Props> = ({ id, name, image, isPublished }) => {
   let cocktailImage = imageNotAvailable;
   const users = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
@@ -57,42 +63,45 @@ const ArtistItem: React.FC<Props> = ({ id, name, image, isPublished }) => {
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Grid item xs={12} sm={6} md={4} lg={3} component={Link} to={'/cocktails/' + id}>
-        <Card>
-          <CardActionArea>
-            <CardMedia sx={{ height: '400px' }} image={cocktailImage} />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {name}
-              </Typography>
-              <Typography gutterBottom variant="h6" component="div">
-                {isPublished ? 'Published' : 'Not published'}
-              </Typography>
-              <Grid container justifyContent="space-between" alignItems="center">
-                <ArrowForwardIosIcon />
-              </Grid>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Grid>
+      <motion.div
+        variants={fadeInVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.5 }}
+      >
+        <Grid item xs={12} sm={6} md={4} lg={3} component={Link} to={'/cocktails/' + id}>
+          <Card>
+            <CardActionArea>
+              <CardMedia sx={{ height: '400px' }} image={cocktailImage} />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {name}
+                </Typography>
+                <Typography gutterBottom variant="h6" component="div">
+                  {isPublished ? 'Published' : 'Not published'}
+                </Typography>
+                <Grid container justifyContent="space-between" alignItems="center">
+                  <ArrowForwardIosIcon />
+                </Grid>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      </motion.div>
       <div style={{ display: 'flex' }}>
-        <Grid item>
-          {users && users.role === userRoles.admin && (
-            <Button color="primary" onClick={handleDeleteClick}>
-              Delete
-            </Button>
-          )}
-        </Grid>
-        <Grid item>
-          {users && users.role === userRoles.admin && (
-            <Button color="primary" onClick={handleTogglePublishedClick}>
-              {isPublished ? 'Publish' : 'Unpublish'}
-            </Button>
-          )}
-        </Grid>
+        {users && users.role === userRoles.admin && (
+          <Button color="primary" onClick={handleDeleteClick}>
+            Delete
+          </Button>
+        )}
+        {users && users.role === userRoles.admin && (
+          <Button color="primary" onClick={handleTogglePublishedClick}>
+            {isPublished ? 'Publish' : 'Unpublish'}
+          </Button>
+        )}
       </div>
     </Grid>
   );
 };
 
-export default ArtistItem;
+export default CocktailItem;

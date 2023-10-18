@@ -1,6 +1,7 @@
-import { createTheme } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
-const theme = createTheme({
+const darkTheme = createTheme({
   components: {
     MuiTextField: {
       defaultProps: {
@@ -9,6 +10,15 @@ const theme = createTheme({
       },
     },
   },
+  palette: {
+    primary: {
+      main: deepPurple[500],
+    },
+    secondary: {
+      main: deepOrange[500],
+    },
+    mode: 'dark',
+  },
 });
 
-export default theme;
+export default darkTheme;

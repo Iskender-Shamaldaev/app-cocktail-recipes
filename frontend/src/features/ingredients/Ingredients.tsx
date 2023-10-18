@@ -1,11 +1,17 @@
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { fetchCocktail } from '../Cocktails/cocktailsThunk';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectCocktails } from '../Cocktails/cocktailsSlice';
 import { useParams } from 'react-router-dom';
-import { Card, CardMedia, Grid, Typography } from '@mui/material';
+import { CardMedia, Grid, Paper, Typography } from '@mui/material';
 import imageNotAvailable from '../../assets/images/imageNotAvailable.png';
 import { apiUrl } from '../../constants';
+
+const scaleAnimation = {
+  hidden: { scale: 0 },
+  visible: { scale: 1 },
+};
 
 const Ingredients = () => {
   const dispatch = useAppDispatch();
@@ -22,40 +28,40 @@ const Ingredients = () => {
   }, [cocktailId, dispatch]);
 
   return (
-    <div>
-      <Grid container direction="column" spacing={2}>
-        <Grid item container justifyContent="space-between" alignItems="center">
-          <Grid item>
-            <Typography variant="h4">List of ingredients</Typography>
+    <motion.div variants={scaleAnimation} initial="hidden" animate="visible">
+      <Paper sx={{ p: 2, boxShadow: 5 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <CardMedia
+              sx={{ height: '100%', maxWidth: '100%', borderRadius: '10px' }}
+              image={cocktailImage}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            {cocktails.map((cocktail) => (
+              <div key={cocktail._id}>
+                <Typography variant="h5" color="primary">
+                  {cocktail.name}
+                </Typography>
+                <Typography>
+                  <strong>Ingredients:</strong>
+                </Typography>
+                <ul>
+                  {cocktail.ingredients.map((ingredient, index) => (
+                    <li key={index}>
+                      {ingredient.quantity}: {ingredient.name}
+                    </li>
+                  ))}
+                </ul>
+                <Typography>
+                  <strong>Recipe:</strong> {cocktail.recipe}
+                </Typography>
+              </div>
+            ))}
           </Grid>
         </Grid>
-        <CardMedia sx={{ height: '400px', borderRadius: '10px' }} image={cocktailImage} />
-        {cocktails.map((cocktail) => (
-          <Card key={cocktail._id} sx={{ mb: 2, mt: 2, p: 2, boxShadow: 5 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div>
-                <h2>{cocktail.name}</h2>
-                <p>
-                  <strong>Ingredients:</strong>
-                  {cocktail.ingredients.map((ingredient, index) => (
-                    <React.Fragment key={index}>
-                      <span>
-                        {ingredient.quantity}: {ingredient.name}
-                      </span>
-                      <br />
-                    </React.Fragment>
-                  ))}
-                </p>
-                <p>
-                  <strong>Recipe: </strong> {cocktail.recipe}
-                </p>
-              </div>
-              <div></div>
-            </div>
-          </Card>
-        ))}
-      </Grid>
-    </div>
+      </Paper>
+    </motion.div>
   );
 };
 

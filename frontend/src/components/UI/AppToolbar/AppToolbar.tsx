@@ -10,7 +10,10 @@ const Link = styled(Navlink)({
   color: 'inherit',
   textDecoration: 'none',
   '&:hover': {
-    color: 'inherit',
+    color: 'orange',
+  },
+  '&:active': {
+    color: 'Purple',
   },
 });
 

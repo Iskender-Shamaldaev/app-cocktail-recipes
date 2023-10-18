@@ -28,7 +28,9 @@ const Cocktails = () => {
       <Grid container direction="column" spacing={2}>
         <Grid item container justifyContent="space-between" alignItems="center">
           <Grid item>
-            <Typography variant="h4">List of cocktails</Typography>
+            <Typography color={'greenyellow'} variant="h5">
+              List of cocktails
+            </Typography>
           </Grid>
 
           <Grid item>

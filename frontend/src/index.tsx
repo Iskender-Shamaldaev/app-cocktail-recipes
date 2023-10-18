@@ -8,7 +8,7 @@ import { addInterceptors } from './axiosApi';
 import { GOOGLE_CLIENT_ID } from './constants';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ThemeProvider } from '@mui/material';
-import theme from './theme';
+import darkTheme from './theme';
 import './index.css';
 import App from './App';
 
@@ -20,7 +20,7 @@ root.render(
     <Provider store={store}>
       <PersistGate persistor={persister}>
         <BrowserRouter>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={darkTheme}>
             <App />
           </ThemeProvider>
         </BrowserRouter>

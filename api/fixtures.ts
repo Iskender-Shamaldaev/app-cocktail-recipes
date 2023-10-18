@@ -82,6 +82,32 @@ const run = async () => {
     },
     {
       user: admin._id,
+      name: 'King of Blue',
+      recipe:
+        'Assembling this cocktail is fairly straightforward, and calls for a whip shake, which means adding one or two pieces of ice to the cocktail shaker, and shaking until they are fully diluted with the other ingredients. As for the concord grape syrup, we’d suggest drizzling a little on top of vanilla ice cream, or mixing it with seltzer for a sweet, rich riff on a shrub. –– Oset Babür-Winter',
+      image: 'fixtures/king.jpg',
+      isPublished: false,
+      ingredients: [
+        {
+          name: 'teaspoon citric acid',
+          quantity: '1',
+        },
+        {
+          name: 'cup water',
+          quantity: '1',
+        },
+        {
+          name: ' cups sugar',
+          quantity: '1/3',
+        },
+        {
+          name: 'ounces frozen blueberries',
+          quantity: '1/2',
+        },
+      ],
+    },
+    {
+      user: admin._id,
       name: 'Manhattan',
       recipe:
         "The Manhattan has been famous since its alleged invention in the late 1800s in New York City's Manhattan Club. We may not know who invented the once-exclusive cocktail, but it's now a common cocktail served worldwide. The classic Manhattan is two parts whiskey, one part sweet vermouth, and bitters.",
