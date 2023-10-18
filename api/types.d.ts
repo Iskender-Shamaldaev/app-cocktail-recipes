@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 export interface IUser {
   username: string;
   password: string;
@@ -10,7 +12,7 @@ export interface IUser {
 }
 
 export interface ICocktail {
-  user: string;
+  user: mongoose.Types.ObjectId;
   name: string;
   recipe: string;
   isPublished: boolean;

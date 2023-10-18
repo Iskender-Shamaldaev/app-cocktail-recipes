@@ -32,8 +32,20 @@ export interface Cocktail {
     name: string;
   };
   name: string;
-  image: string | null;
+  image: string;
   isPublished: boolean;
+  recipe: string;
+  ingredients: [
+    {
+      name: string;
+      quantity: string;
+    },
+  ];
+}
+
+export interface CocktailMutation {
+  name: string;
+  image: File | null;
   recipe: string;
   ingredients: [
     {

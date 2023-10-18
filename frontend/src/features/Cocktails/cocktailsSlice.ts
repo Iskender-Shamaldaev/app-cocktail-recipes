@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Cocktail } from '../../../type';
 import {
+  createCocktail,
   deleteCocktail,
   fetchCocktail,
   fetchCocktails,
@@ -12,12 +13,14 @@ interface CocktailsState {
   items: Cocktail[];
   fetchLoading: boolean;
   deleteLoading: boolean;
+  createLoading: boolean;
 }
 
 const initialState: CocktailsState = {
   items: [],
   fetchLoading: false,
   deleteLoading: false,
+  createLoading: false,
 };
 
 export const cocktailsSlice = createSlice({
@@ -36,6 +39,7 @@ export const cocktailsSlice = createSlice({
     builder.addCase(fetchCocktails.rejected, (state) => {
       state.fetchLoading = false;
     });
+
     builder.addCase(fetchCocktail.pending, (state) => {
       state.fetchLoading = true;
     });
@@ -43,7 +47,6 @@ export const cocktailsSlice = createSlice({
       state.fetchLoading = false;
       state.items = [cocktail];
     });
-
     builder.addCase(fetchCocktail.rejected, (state) => {
       state.fetchLoading = false;
     });
@@ -56,6 +59,16 @@ export const cocktailsSlice = createSlice({
     });
     builder.addCase(deleteCocktail.rejected, (state) => {
       state.deleteLoading = false;
+    });
+
+    builder.addCase(createCocktail.pending, (state) => {
+      state.createLoading = true;
+    });
+    builder.addCase(createCocktail.fulfilled, (state) => {
+      state.createLoading = false;
+    });
+    builder.addCase(createCocktail.rejected, (state) => {
+      state.createLoading = false;
     });
 
     builder.addCase(toggleCocktailPublished.pending, (state) => {
@@ -73,3 +86,4 @@ export const cocktailsSlice = createSlice({
 export const cocktailsReducer = cocktailsSlice.reducer;
 export const selectCocktails = (state: RootState) => state.cocktails.items;
 export const selectCocktailsLoading = (state: RootState) => state.cocktails.fetchLoading;
+export const selectCocktailCreating = (state: RootState) => state.cocktails.createLoading;

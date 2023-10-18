@@ -1,10 +1,11 @@
 import express from 'express';
-import auth from '../midldleware/auth';
+import auth, { RequestWithUser } from '../midldleware/auth';
 import { imagesUpload } from '../multer';
 import mongoose from 'mongoose';
-import { ICocktail } from '../types';
+// import { ICocktail } from '../types';
 import Cocktail from '../models/Cocktail';
 import permit from '../midldleware/permit';
+import { ICocktail } from '../types';
 
 const cocktailRouter = express.Router();
 
@@ -45,9 +46,10 @@ cocktailRouter.get('/:id', async (req, res) => {
 });
 
 cocktailRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next) => {
+  const user = (req as RequestWithUser).user;
   try {
-    const productData: ICocktail = {
-      user: req.body.user,
+    const cocktailData: ICocktail = {
+      user: user._id,
       name: req.body.name,
       recipe: req.body.recipe,
       isPublished: req.body.isPublished,
@@ -55,7 +57,7 @@ cocktailRouter.post('/', auth, imagesUpload.single('image'), async (req, res, ne
       image: req.file ? req.file.filename : null,
     };
 
-    const cocktail = new Cocktail(productData);
+    const cocktail = new Cocktail(cocktailData);
     await cocktail.save();
 
     return res.send(cocktail);
