@@ -6,6 +6,7 @@ import { selectCocktails } from './cocktailsSlice';
 import { fetchCocktails } from './cocktailsThunk';
 import CocktailItem from './components/CocktailItem';
 import { selectUser } from '../users/usersSlice';
+import AddIcon from '@mui/icons-material/Add';
 
 const Cocktails = () => {
   const dispatch = useAppDispatch();
@@ -34,7 +35,13 @@ const Cocktails = () => {
           </Grid>
 
           <Grid item>
-            <Button color="primary" component={Link} to="/cocktails/new">
+            <Button
+              variant="contained"
+              color="primary"
+              component={Link}
+              to="/cocktails/new"
+              startIcon={<AddIcon />}
+            >
               <strong> Add cocktail</strong>
             </Button>
           </Grid>

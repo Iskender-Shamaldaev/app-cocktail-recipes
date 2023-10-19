@@ -17,6 +17,8 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectUser } from '../../users/usersSlice';
 import { deleteCocktail, fetchCocktails, toggleCocktailPublished } from '../cocktailsThunk';
 import { motion } from 'framer-motion';
+import DeleteIcon from '@mui/icons-material/Delete';
+import PublishIcon from '@mui/icons-material/Publish';
 
 const Link = styled(Navlink)({
   color: 'inherit',
@@ -88,14 +90,25 @@ const CocktailItem: React.FC<Props> = ({ id, name, image, isPublished }) => {
           </Card>
         </Grid>
       </motion.div>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', margin: '5px' }}>
         {users && users.role === userRoles.admin && (
-          <Button color="primary" onClick={handleDeleteClick}>
+          <Button
+            sx={{ marginRight: '10px' }}
+            variant="contained"
+            color="error"
+            onClick={handleDeleteClick}
+            startIcon={<DeleteIcon />}
+          >
             Delete
           </Button>
         )}
         {users && users.role === userRoles.admin && (
-          <Button color="primary" onClick={handleTogglePublishedClick}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleTogglePublishedClick}
+            startIcon={<PublishIcon />}
+          >
             {isPublished ? 'Publish' : 'Unpublish'}
           </Button>
         )}

@@ -33,7 +33,7 @@ const Ingredients = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <CardMedia
-              sx={{ height: '100%', maxWidth: '100%', borderRadius: '10px' }}
+              sx={{ height: '500px', maxWidth: '100%', borderRadius: '10px' }}
               image={cocktailImage}
             />
           </Grid>

@@ -81,6 +81,40 @@ const run = async () => {
       ],
     },
     {
+      user: user1._id,
+      name: 'Purple Rain',
+      recipe:
+        'Before we dive into some background on this Purple Rain cocktail, here are some other cocktail recipes you\'ll probably enjoy: the Vegas Bomb, Cotton Candy Shots, the Liquid Marijuana Shot, the Liquid Marijuana Cocktail, the Green Tea Shot, and the Adios Motherfucker cocktail. As far as where this drink originates, the Purple Rain cocktail recipe wiki notes that "The Purple Rain refers to at least two popular mixed drinks. .',
+      image: 'fixtures/purple.jpg',
+      isPublished: false,
+      ingredients: [
+        {
+          name: 'Vodka',
+          quantity: '1.5 oz',
+        },
+        {
+          name: 'Lemonade',
+          quantity: '3 oz',
+        },
+        {
+          name: 'Blue curaçao',
+          quantity: '0.5 oz',
+        },
+        {
+          name: 'Grenadine',
+          quantity: '0.25 oz',
+        },
+        {
+          name: 'Sugar',
+          quantity: '1',
+        },
+        {
+          name: 'Lemon',
+          quantity: '1',
+        },
+      ],
+    },
+    {
       user: admin._id,
       name: 'King of Blue',
       recipe:
@@ -162,6 +196,89 @@ const run = async () => {
         },
         {
           name: 'slice lime',
+          quantity: '1',
+        },
+      ],
+    },
+    {
+      user: user2._id,
+      name: 'Mojito',
+      recipe: 'The Mojito is a classic Cuban cocktail that has gained worldwide popularity.',
+      image: 'fixtures/mojito.jpg',
+      isPublished: false,
+      ingredients: [
+        {
+          name: 'fluid ounces white rum',
+          quantity: '60 ml',
+        },
+        {
+          name: 'fluid ounce fresh lime juice',
+          quantity: '30 ml',
+        },
+        {
+          name: 'teaspoons sugar',
+          quantity: '8',
+        },
+        {
+          name: 'fresh mint leaves',
+          quantity: '6-8',
+        },
+        {
+          name: 'cup ice cubes',
+          quantity: '1',
+        },
+        {
+          name: 'soda water',
+          quantity: 'to top',
+        },
+      ],
+    },
+    {
+      user: admin._id,
+      name: 'Piña Colada',
+      recipe: 'The Piña Colada is a tropical cocktail known for its creamy and fruity flavor.',
+      image: 'fixtures/pina_colada.jpg',
+      isPublished: false,
+      ingredients: [
+        {
+          name: 'fluid ounces white rum',
+          quantity: '60 ml',
+        },
+        {
+          name: 'fluid ounces coconut cream',
+          quantity: '60 ml',
+        },
+        {
+          name: 'fluid ounces pineapple juice',
+          quantity: '90 ml',
+        },
+        {
+          name: 'cup crushed ice',
+          quantity: '1',
+        },
+      ],
+    },
+    {
+      user: user2._id,
+      name: 'Tequila Sunrise',
+      recipe: 'The Tequila Sunrise is a visually stunning cocktail with layers of vibrant colors.',
+      image: 'fixtures/tequila_sunrise.jpg',
+      isPublished: false,
+      ingredients: [
+        {
+          name: 'fluid ounces tequila',
+          quantity: '60 ml',
+        },
+        {
+          name: 'fluid ounces orange juice',
+          quantity: '120 ml',
+        },
+        {
+          name: 'fluid ounce grenadine syrup',
+          quantity: '30 ml',
+        },
+        {
+          name: 'cup ice cubes',
           quantity: '1',
         },
       ],
