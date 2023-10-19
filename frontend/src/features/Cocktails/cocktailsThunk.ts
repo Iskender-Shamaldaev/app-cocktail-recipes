@@ -7,6 +7,14 @@ export const fetchCocktails = createAsyncThunk<Cocktail[]>('cocktails/fetchAll',
   return cocktailsResponse.data;
 });
 
+export const fetchUsersCocktails = createAsyncThunk<Cocktail[]>(
+  'cocktails/fetchUsers',
+  async () => {
+    const cocktailsResponse = await axiosApi.get<Cocktail[]>('/cocktails/secret');
+    return cocktailsResponse.data;
+  },
+);
+
 export const fetchCocktail = createAsyncThunk<Cocktail, string>(
   'cocktails/fetchOne',
   async (cocktailId) => {

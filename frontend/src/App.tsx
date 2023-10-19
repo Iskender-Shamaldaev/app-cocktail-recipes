@@ -24,7 +24,7 @@ function App() {
             <Route path="/" element={<Cocktails />} />
             <Route path="/cocktails/:id" element={<Ingredients />} />
             <Route path="/cocktails/new" element={<CocktailsForm />} />
-            <Route path="/my-cocktails" element={<MyCocktails />} />
+            <Route path="/cocktails/secret" element={<MyCocktails />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Routes>

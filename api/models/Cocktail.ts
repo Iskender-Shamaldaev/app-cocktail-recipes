@@ -3,6 +3,17 @@ import User from './User';
 
 const Schema = mongoose.Schema;
 
+const IngredientSchema = new Schema({
+  name: {
+    required: true,
+    type: String,
+  },
+  quantity: {
+    required: true,
+    type: String,
+  },
+});
+
 const CocktailSchema = new Schema({
   user: {
     type: mongoose.Types.ObjectId,
@@ -31,19 +42,8 @@ const CocktailSchema = new Schema({
     default: false,
   },
   ingredients: {
-    type: [
-      {
-        name: {
-          type: String,
-          required: true,
-        },
-        quantity: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
     required: true,
+    type: [IngredientSchema],
   },
 });
 

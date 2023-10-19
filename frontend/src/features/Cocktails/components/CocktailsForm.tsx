@@ -76,7 +76,10 @@ const CocktailsForm = () => {
   };
 
   const addIngredientHandler = () => {
-    console.log('111');
+    setState((prevState) => ({
+      ...prevState,
+      ingredients: [...state.ingredients, { name: '', quantity: '' }],
+    }));
   };
 
   return !cocktailsLoading ? (

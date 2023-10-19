@@ -43,16 +43,16 @@ export interface Cocktail {
   ];
 }
 
+interface IIngredient {
+  name: string;
+  quantity: string;
+}
+
 export interface CocktailMutation {
   name: string;
   image: File | null;
   recipe: string;
-  ingredients: [
-    {
-      name: string;
-      quantity: string;
-    },
-  ];
+  ingredients: IIngredient[];
 }
 
 export interface ValidationError {

@@ -29,7 +29,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 
   return (
     <>
-      <Button component={NavLink} to="/my-cocktails" color="warning">
+      <Button component={NavLink} to="/cocktails/secret" color="warning">
         My Cocktails
       </Button>
       <CardMedia>

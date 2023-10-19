@@ -6,11 +6,13 @@ import {
   deleteCocktail,
   fetchCocktail,
   fetchCocktails,
+  fetchUsersCocktails,
   toggleCocktailPublished,
 } from './cocktailsThunk';
 
 interface CocktailsState {
   items: Cocktail[];
+  item: Cocktail[];
   fetchLoading: boolean;
   deleteLoading: boolean;
   createLoading: boolean;
@@ -18,6 +20,7 @@ interface CocktailsState {
 
 const initialState: CocktailsState = {
   items: [],
+  item: [],
   fetchLoading: false,
   deleteLoading: false,
   createLoading: false,
@@ -37,6 +40,18 @@ export const cocktailsSlice = createSlice({
       state.items = cocktails;
     });
     builder.addCase(fetchCocktails.rejected, (state) => {
+      state.fetchLoading = false;
+    });
+
+    builder.addCase(fetchUsersCocktails.pending, (state) => {
+      state.fetchLoading = true;
+    });
+
+    builder.addCase(fetchUsersCocktails.fulfilled, (state, { payload: cocktails }) => {
+      state.fetchLoading = false;
+      state.item = cocktails;
+    });
+    builder.addCase(fetchUsersCocktails.rejected, (state) => {
       state.fetchLoading = false;
     });
 
@@ -85,5 +100,6 @@ export const cocktailsSlice = createSlice({
 
 export const cocktailsReducer = cocktailsSlice.reducer;
 export const selectCocktails = (state: RootState) => state.cocktails.items;
+export const selectUserCocktails = (state: RootState) => state.cocktails.item;
 export const selectCocktailsLoading = (state: RootState) => state.cocktails.fetchLoading;
 export const selectCocktailCreating = (state: RootState) => state.cocktails.createLoading;

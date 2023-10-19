@@ -2,7 +2,6 @@ import express from 'express';
 import auth, { RequestWithUser } from '../midldleware/auth';
 import { imagesUpload } from '../multer';
 import mongoose from 'mongoose';
-// import { ICocktail } from '../types';
 import Cocktail from '../models/Cocktail';
 import permit from '../midldleware/permit';
 import { ICocktail } from '../types';
@@ -11,21 +10,19 @@ const cocktailRouter = express.Router();
 
 cocktailRouter.get('/', async (req, res) => {
   try {
-    const userQuery = req.query.user;
+    const cocktails = await Cocktail.find();
+    res.send(cocktails);
+  } catch (e) {
+    return res.send(500);
+  }
+});
 
-    let query = Cocktail.find();
-
-    if (userQuery) {
-      query = query.where('artist', userQuery);
-    }
-
-    query = query.populate('user', 'name');
-
-    const results = await query;
-
-    res.send(results);
-  } catch (error) {
-    console.error(error);
+cocktailRouter.get('/secret', auth, async (req, res) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    const userCocktails = await Cocktail.find({ user: user._id });
+    res.send(userCocktails);
+  } catch (e) {
     return res.sendStatus(500);
   }
 });
