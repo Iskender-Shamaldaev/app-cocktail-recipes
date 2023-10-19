@@ -46,6 +46,7 @@ export interface Cocktail {
 interface IIngredient {
   name: string;
   quantity: string;
+  id: string;
 }
 
 export interface CocktailMutation {

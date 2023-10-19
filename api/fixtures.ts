@@ -36,7 +36,7 @@ const run = async () => {
     },
     {
       username: 'alex',
-      password: '1qaz@WSX29',
+      password: '111',
       token: crypto.randomUUID(),
       role: 'user',
       displayName: 'Alex',

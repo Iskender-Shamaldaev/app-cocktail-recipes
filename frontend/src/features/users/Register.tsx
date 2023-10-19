@@ -79,6 +79,7 @@ const Register = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                required
                 fullWidth
                 label="Username"
                 name="username"
@@ -92,6 +93,7 @@ const Register = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
+                required
                 name="password"
                 label="Password"
                 type="password"
@@ -104,6 +106,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                required
                 label="Display name"
                 name="displayName"
                 autoComplete="new-displayName"
@@ -116,6 +119,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                required
                 label="Email"
                 name="email"
                 autoComplete="email"

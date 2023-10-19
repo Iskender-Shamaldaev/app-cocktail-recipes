@@ -8,24 +8,33 @@ import SendIcon from '@mui/icons-material/Send';
 import { CocktailMutation } from '../../../../type';
 import { createCocktail } from '../cocktailsThunk';
 import { selectCocktailsLoading } from '../cocktailsSlice';
+import { selectUser } from '../../users/usersSlice';
+import { userRoles } from '../../../constants';
 
 const CocktailsForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loading = useAppSelector(selectCocktailsLoading);
   const cocktailsLoading = useAppSelector(selectCocktailsLoading);
+  const users = useAppSelector(selectUser);
 
   const [state, setState] = useState<CocktailMutation>({
     name: '',
     image: null,
     recipe: '',
-    ingredients: [{ name: '', quantity: '' }],
+    ingredients: [{ name: '', quantity: '', id: '0' }],
   });
 
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     await dispatch(createCocktail(state)).unwrap();
-    navigate('/');
+    if (users && users.role !== userRoles.admin) {
+      if (window.confirm('Your cocktail is being reviewed by a moderator!!!')) {
+        navigate('/');
+      }
+    } else {
+      navigate('/');
+    }
   };
 
   const filesInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,46 +49,54 @@ const CocktailsForm = () => {
     }
   };
 
-  const ingredientName = state.ingredients[0].name;
-  const ingredientQuantity = state.ingredients[0].quantity;
-
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
 
-    if (name === 'ingredientName') {
-      setState((prevState) => ({
-        ...prevState,
-        ingredients: [
-          {
-            name: value,
-            quantity: ingredientQuantity,
-          },
-        ],
-      }));
-    } else if (name === 'ingredientQuantity') {
-      setState((prevState) => ({
-        ...prevState,
-        ingredients: [
-          {
-            name: ingredientName,
-            quantity: value,
-          },
-        ],
-      }));
-    } else {
-      setState((prevState) => ({
+    setState((prevState) => {
+      return {
         ...prevState,
         [name]: value,
-      }));
-    }
+      };
+    });
+  };
+  const ingredientsChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    id: string,
+  ) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setState((prevState) => {
+      return {
+        ...prevState,
+        ingredients: prevState.ingredients.map((ing) => {
+          if (ing.id === id) {
+            return {
+              ...ing,
+              [name]: value,
+            };
+          }
+          return ing;
+        }),
+      };
+    });
   };
 
   const addIngredientHandler = () => {
+    const id = state.ingredients.length.toString();
     setState((prevState) => ({
       ...prevState,
-      ingredients: [...state.ingredients, { name: '', quantity: '' }],
+      ingredients: [...state.ingredients, { name: '', quantity: '', id }],
     }));
+  };
+
+  const deleteIngredientHandler = (idToDelete: string) => {
+    if (state.ingredients.length > 1) {
+      setState((prevState) => ({
+        ...prevState,
+        ingredients: prevState.ingredients.filter((ing) => ing.id !== idToDelete),
+      }));
+    }
   };
 
   return !cocktailsLoading ? (
@@ -87,6 +104,7 @@ const CocktailsForm = () => {
       <Grid item sx={{ mb: 2 }}>
         <Typography variant="h5">Add a new cocktail</Typography>
       </Grid>
+
       <Grid container direction="column" spacing={2}>
         <Grid item xs>
           <TextField
@@ -98,30 +116,36 @@ const CocktailsForm = () => {
             required
           />
         </Grid>
-        {state.ingredients.map((ingredient, index) => (
-          <Grid item xs container key={index}>
+        {state.ingredients.map((ing, index) => (
+          <Grid item xs container key={ing.id}>
             <Grid item xs>
               <TextField
-                id={`ingredientName-${index}`}
+                required
                 label="Ingredient Name"
-                value={ingredient.name}
-                onChange={inputChangeHandler}
-                name="ingredientName"
-                data-index={index}
+                value={ing.name}
+                onChange={(event) => ingredientsChangeHandler(event, ing.id)}
+                name="name"
               />
             </Grid>
-            <Grid item xs>
+            <Grid item xs sx={{ marginLeft: 2 }}>
               <TextField
-                id={`ingredientQuantity-${index}`}
+                required
                 label="Amount"
-                value={ingredient.quantity}
-                onChange={inputChangeHandler}
-                name="ingredientQuantity"
-                data-index={index}
+                value={ing.quantity}
+                onChange={(event) => ingredientsChangeHandler(event, ing.id)}
+                name="quantity"
               />
+            </Grid>
+            <Grid item sx={{ marginLeft: 2, marginTop: 1 }}>
+              {index !== 0 && (
+                <Button onClick={() => deleteIngredientHandler(ing.id)} variant="contained">
+                  Delete
+                </Button>
+              )}
             </Grid>
           </Grid>
         ))}
+
         <Grid item>
           <Button onClick={addIngredientHandler} variant="contained">
             Add ingredient
