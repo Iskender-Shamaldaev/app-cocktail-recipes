@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { CardMedia, Grid, Paper, Typography } from '@mui/material';
 import imageNotAvailable from '../../../assets/images/imageNotAvailable.png';
 import { apiUrl } from '../../../constants';
-import RatingComponent from '../../../components/RaitingComponent';
+import RatingComponent from '../../../components/RatingComponent';
 
 const scaleAnimation = {
   hidden: { scale: 0 },
