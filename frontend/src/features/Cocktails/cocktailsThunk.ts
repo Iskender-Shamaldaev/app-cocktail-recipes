@@ -18,8 +18,14 @@ export const fetchUsersCocktails = createAsyncThunk<Cocktail[]>(
 export const fetchCocktail = createAsyncThunk<Cocktail, string>(
   'cocktails/fetchOne',
   async (cocktailId) => {
-    const cocktailsResponse = await axiosApi.get<Cocktail>(`/cocktails/${cocktailId}`);
-    return cocktailsResponse.data;
+    const response = await axiosApi.get<Cocktail | null>(`/cocktails/${cocktailId}`);
+    const cocktail = response.data;
+
+    if (cocktail === null) {
+      throw new Error('Not found');
+    }
+
+    return cocktail;
   },
 );
 

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { fetchUsersCocktails } from '../Cocktails/cocktailsThunk';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectUserCocktails } from '../Cocktails/cocktailsSlice';
+import { fetchUsersCocktails } from '../cocktailsThunk';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectCocktails } from '../cocktailsSlice';
 import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material';
-import { apiUrl } from '../../constants';
+import { apiUrl } from '../../../constants';
 
 const MyCocktails = () => {
   const dispatch = useAppDispatch();
-  const cocktails = useAppSelector(selectUserCocktails);
+  const cocktails = useAppSelector(selectCocktails);
 
   useEffect(() => {
     dispatch(fetchUsersCocktails());

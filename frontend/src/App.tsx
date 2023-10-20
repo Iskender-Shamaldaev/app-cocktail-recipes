@@ -5,9 +5,9 @@ import AppToolbar from './components/UI/AppToolbar/AppToolbar';
 import Register from './features/users/Register';
 import Login from './features/users/Login';
 import Cocktails from './features/Cocktails/Cocktails';
-import Ingredients from './features/ingredients/Ingredients';
+import OneCocktail from './features/Cocktails/components/OneCocktail';
 import CocktailsForm from './features/Cocktails/components/CocktailsForm';
-import MyCocktails from './features/MyCocktails/MyCocktails';
+import MyCocktails from './features/Cocktails/components/MyCocktails';
 import './App.css';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Container maxWidth="xl">
           <Routes>
             <Route path="/" element={<Cocktails />} />
-            <Route path="/cocktails/:id" element={<Ingredients />} />
+            <Route path="/cocktails/:id" element={<OneCocktail />} />
             <Route path="/cocktails/new" element={<CocktailsForm />} />
             <Route path="/cocktails/secret" element={<MyCocktails />} />
             <Route path="/register" element={<Register />} />

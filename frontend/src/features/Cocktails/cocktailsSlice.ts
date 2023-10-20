@@ -12,7 +12,7 @@ import {
 
 interface CocktailsState {
   items: Cocktail[];
-  item: Cocktail[];
+  item: Cocktail | null;
   fetchLoading: boolean;
   deleteLoading: boolean;
   createLoading: boolean;
@@ -20,7 +20,7 @@ interface CocktailsState {
 
 const initialState: CocktailsState = {
   items: [],
-  item: [],
+  item: null,
   fetchLoading: false,
   deleteLoading: false,
   createLoading: false,
@@ -49,7 +49,7 @@ export const cocktailsSlice = createSlice({
 
     builder.addCase(fetchUsersCocktails.fulfilled, (state, { payload: cocktails }) => {
       state.fetchLoading = false;
-      state.item = cocktails;
+      state.items = cocktails;
     });
     builder.addCase(fetchUsersCocktails.rejected, (state) => {
       state.fetchLoading = false;
@@ -60,7 +60,7 @@ export const cocktailsSlice = createSlice({
     });
     builder.addCase(fetchCocktail.fulfilled, (state, { payload: cocktail }) => {
       state.fetchLoading = false;
-      state.items = [cocktail];
+      state.item = cocktail;
     });
     builder.addCase(fetchCocktail.rejected, (state) => {
       state.fetchLoading = false;
@@ -100,6 +100,6 @@ export const cocktailsSlice = createSlice({
 
 export const cocktailsReducer = cocktailsSlice.reducer;
 export const selectCocktails = (state: RootState) => state.cocktails.items;
-export const selectUserCocktails = (state: RootState) => state.cocktails.item;
+export const selectCocktail = (state: RootState) => state.cocktails.item;
 export const selectCocktailsLoading = (state: RootState) => state.cocktails.fetchLoading;
 export const selectCocktailCreating = (state: RootState) => state.cocktails.createLoading;

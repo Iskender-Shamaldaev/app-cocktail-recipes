@@ -21,6 +21,11 @@ cocktailRouter.get('/secret', auth, async (req, res) => {
   try {
     const user = (req as RequestWithUser).user;
     const userCocktails = await Cocktail.find({ user: user._id });
+
+    if (!userCocktails) {
+      return res.sendStatus(404);
+    }
+
     res.send(userCocktails);
   } catch (e) {
     return res.sendStatus(500);
