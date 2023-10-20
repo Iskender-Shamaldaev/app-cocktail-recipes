@@ -14,6 +14,24 @@ const IngredientSchema = new Schema({
   },
 });
 
+const RatingSchema = new Schema({
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User',
+    required: true,
+    validate: {
+      validator: async (value: mongoose.Types.ObjectId) => await User.findById(value),
+      message: 'User does not exist!',
+    },
+  },
+  rating: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5,
+  },
+});
+
 const CocktailSchema = new Schema({
   user: {
     type: mongoose.Types.ObjectId,
@@ -44,6 +62,10 @@ const CocktailSchema = new Schema({
   ingredients: {
     required: true,
     type: [IngredientSchema],
+  },
+  ratings: {
+    required: true,
+    type: [RatingSchema],
   },
 });
 

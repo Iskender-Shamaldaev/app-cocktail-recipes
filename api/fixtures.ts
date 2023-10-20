@@ -79,6 +79,12 @@ const run = async () => {
           quantity: '2',
         },
       ],
+      ratings: [
+        {
+          user: user1._id,
+          rating: 5,
+        },
+      ],
     },
     {
       user: user1._id,
@@ -113,6 +119,12 @@ const run = async () => {
           quantity: '1',
         },
       ],
+      ratings: [
+        {
+          user: user1._id,
+          rating: 5,
+        },
+      ],
     },
     {
       user: admin._id,
@@ -137,6 +149,12 @@ const run = async () => {
         {
           name: 'ounces frozen blueberries',
           quantity: '1/2',
+        },
+      ],
+      ratings: [
+        {
+          user: admin._id,
+          rating: 4,
         },
       ],
     },
@@ -169,6 +187,12 @@ const run = async () => {
           quantity: '1',
         },
       ],
+      ratings: [
+        {
+          user: admin._id,
+          rating: 4,
+        },
+      ],
     },
     {
       user: user2._id,
@@ -197,6 +221,12 @@ const run = async () => {
         {
           name: 'slice lime',
           quantity: '1',
+        },
+      ],
+      ratings: [
+        {
+          user: user2._id,
+          rating: 5,
         },
       ],
     },
@@ -232,6 +262,12 @@ const run = async () => {
           quantity: 'to top',
         },
       ],
+      ratings: [
+        {
+          user: user2._id,
+          rating: 5,
+        },
+      ],
     },
     {
       user: admin._id,
@@ -257,6 +293,12 @@ const run = async () => {
           quantity: '1',
         },
       ],
+      ratings: [
+        {
+          user: admin._id,
+          rating: 4,
+        },
+      ],
     },
     {
       user: user2._id,
@@ -280,6 +322,12 @@ const run = async () => {
         {
           name: 'cup ice cubes',
           quantity: '1',
+        },
+      ],
+      ratings: [
+        {
+          user: user2._id,
+          rating: 5,
         },
       ],
     },

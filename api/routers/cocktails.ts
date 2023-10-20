@@ -34,10 +34,7 @@ cocktailRouter.get('/secret', auth, async (req, res) => {
 
 cocktailRouter.get('/:id', async (req, res) => {
   try {
-    const result = await Cocktail.findById(req.params.id).populate({
-      path: 'user',
-      select: '-_id name',
-    });
+    const result = await Cocktail.findById(req.params.id);
     if (!result) {
       return res.sendStatus(404);
     }

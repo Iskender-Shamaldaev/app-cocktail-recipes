@@ -41,6 +41,12 @@ export interface Cocktail {
       quantity: string;
     },
   ];
+  ratings: [
+    {
+      user: string;
+      rating: number;
+    },
+  ];
 }
 
 interface IIngredient {
