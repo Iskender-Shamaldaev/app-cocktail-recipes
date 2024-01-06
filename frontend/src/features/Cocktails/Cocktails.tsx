@@ -15,7 +15,6 @@ const Cocktails = () => {
     dispatch(fetchCocktails());
   }, [dispatch]);
 
-
   return (
     <>
       <Grid container direction="column" spacing={2}>
@@ -32,7 +31,7 @@ const Cocktails = () => {
               color="primary"
               component={Link}
               to="/cocktails/new"
-              startIcon={<AddIcon/>}
+              startIcon={<AddIcon />}
             >
               <strong> Add cocktail</strong>
             </Button>
