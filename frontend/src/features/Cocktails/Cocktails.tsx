@@ -1,28 +1,20 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Button, Grid, Typography } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { selectCocktails } from './cocktailsSlice';
 import { fetchCocktails } from './cocktailsThunk';
 import CocktailItem from './components/CocktailItem';
-import { selectUser } from '../users/usersSlice';
 import AddIcon from '@mui/icons-material/Add';
 
 const Cocktails = () => {
   const dispatch = useAppDispatch();
   const cocktails = useAppSelector(selectCocktails);
-  const user = useAppSelector(selectUser);
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchCocktails());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-  }, [navigate, user]);
 
   return (
     <>
@@ -40,7 +32,7 @@ const Cocktails = () => {
               color="primary"
               component={Link}
               to="/cocktails/new"
-              startIcon={<AddIcon />}
+              startIcon={<AddIcon/>}
             >
               <strong> Add cocktail</strong>
             </Button>
