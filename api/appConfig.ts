@@ -7,7 +7,7 @@ dotenv.config();
 const appConfig = {
   rootPath,
   publicPath: path.join(rootPath, 'public'),
-  db: 'mongodb://localhost/cocktail',
+  db: 'mongodb+srv://Iskender:VFce4reMBWgqc6wa@cluster0.a563fgc.mongodb.net/?retryWrites=true&w=majority',
   google: {
     clientId: process.env.GOOGLE_CLIENT_ID,
   },
