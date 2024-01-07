@@ -2,13 +2,13 @@ import express from 'express';
 import User from '../models/User';
 import mongoose from 'mongoose';
 import { OAuth2Client } from 'google-auth-library';
-import appConfig from '../appConfig';
+import config from '../config';
 import * as crypto from 'crypto';
 import auth, { RequestWithUser } from '../midldleware/auth';
 import { imagesUpload } from '../multer';
 
 const userRouter = express.Router();
-const client = new OAuth2Client(appConfig.google.clientId);
+const client = new OAuth2Client(config.google.clientId);
 
 userRouter.post('/', imagesUpload.single('avatar'), async (req, res, next) => {
   try {
@@ -67,7 +67,7 @@ userRouter.post('/google', async (req, res, next) => {
   try {
     const ticket = await client.verifyIdToken({
       idToken: req.body.credential,
-      audience: appConfig.google.clientId,
+      audience: config.google.clientId,
     });
 
     const payload = ticket.getPayload();
