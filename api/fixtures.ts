@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import crypto from 'crypto';
-import config from './config';
+import appConfig from './appConfig';
 import User from './models/User';
 import Cocktail from './models/Cocktail';
 
 const run = async () => {
-  await mongoose.connect(config.db);
+  await mongoose.connect(appConfig.db);
   const db = mongoose.connection;
 
   try {
