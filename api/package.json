@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.ts",
-    "build": "npx tsc",
+    "build": "npm i",
     "seed": "ts-node fixtures.ts",
     "lint": "eslint '**/*.{ts,tsx}'",
     "format:check": "prettier --check .",
