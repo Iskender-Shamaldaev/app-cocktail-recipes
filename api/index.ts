@@ -7,7 +7,13 @@ import cocktailRouter from './routers/cocktails';
 
 const app = express();
 const port = 8000;
-app.use(cors());
+app.use(cors(
+  {
+    origin: ['http://localhost:3000'],
+    methods:['GET,HEAD,PUT,PATCH,POST,DELETE'],
+    credentials: true
+  }
+));
 
 app.use(express.static('public'));
 app.use(express.json());
