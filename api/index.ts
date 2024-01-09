@@ -9,7 +9,7 @@ const app = express();
 const port = 8000;
 app.use(cors(
   {
-    origin: ['http://localhost:3000'],
+    origin: ['https://react-crud-3nye.onrender.com'],
     methods:['GET,HEAD,PUT,PATCH,POST,DELETE'],
     credentials: true
   }
