@@ -11,8 +11,15 @@ const port = 8000;
 app.use(cors({
   origin: ['https://app-cocktail-recipes.netlify.app'],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  credentials: true,
 }));
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://app-cocktail-recipes.netlify.app');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Allow-Credentials');
+  next();
+});
+
 
 app.use(express.static('public'));
 app.use(express.json());
