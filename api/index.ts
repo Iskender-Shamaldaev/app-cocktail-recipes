@@ -7,13 +7,12 @@ import cocktailRouter from './routers/cocktails';
 
 const app = express();
 const port = 8000;
-app.use(cors(
-  {
-    origin: ['https://react-crud-3nye.onrender.com'],
-    methods:['GET,HEAD,PUT,PATCH,POST,DELETE'],
-    credentials: true
-  }
-));
+
+app.use(cors({
+  origin: ['https://app-cocktail-recipes.netlify.app'],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  credentials: true,
+}));
 
 app.use(express.static('public'));
 app.use(express.json());
