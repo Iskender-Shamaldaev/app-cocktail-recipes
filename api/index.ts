@@ -14,8 +14,6 @@ app.use(cors({
   credentials: true,
 }));
 
-app.options('*', cors());
-
 app.use(express.static('public'));
 app.use(express.json());
 app.use('/users', userRouter);
